@@ -1,11 +1,16 @@
-OBJS = csi_fun.o main.o
+SENDOBJS = csi_fun.o send.o
+RECVOBJS = csi_fun.o recv.o
 CC = gcc
-recv_csi: $(OBJS)
-	$(CC) $(OBJS) -o recv_csi
+recv: $(RECVOBJS)
+	$(CC) $(RECVOBJS) -o recv
+send: $(SENDOBJS)
+	$(CC) $(SENDOBJS) -o send
 csi_fun.o: csi_fun.c csi_fun.h
 	$(CC) -c csi_fun.c -o csi_fun.o
-main.o: main.c csi_fun.h
-	$(CC) -c main.c -o main.o
+send.o: send.c csi_fun.h
+	$(CC) -c send.c -o send.o
+recv.o: recv.c csi_fun.h
+	$(CC) -c recv.c -o recv.o
 clean: 
-	rm -f *.o recv_csi
+	rm -f *.o recv send
 
